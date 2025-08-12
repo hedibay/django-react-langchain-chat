@@ -58,6 +58,7 @@ button {
   width: 100%;
   padding: 0 5rem;
   box-sizing: border-box;
+  z-index: 0;
 }
 
 .message {
@@ -78,11 +79,48 @@ button {
   margin: 0;
 }
 
+.markdown-body h2 {
+  margin: 0.6rem 0 0.2rem;
+}
+.markdown-body ul {
+  margin: 0.2rem 0 0.6rem 1.2rem;
+}
+.markdown-body code {
+  background: rgba(255,255,255,0.06);
+  padding: 0 4px;
+  border-radius: 4px;
+}
+.markdown-body pre {
+  background: rgba(255,255,255,0.06);
+  padding: 8px 10px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
 .connection-status {
   position: fixed;
   top: 10px;
   right: 20px;
   z-index: 1000;
+}
+
+.mode-panel {
+  position: fixed;
+  top: 10px;
+  left: 20px;
+  z-index: 2000;
+  background-color: rgba(33, 33, 33, 0.9);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #444;
+}
+
+.mode-panel select {
+  margin-left: 6px;
+}
+
+.mode-panel textarea {
+  width: 360px;
 }
 
 .status-indicator {
@@ -112,4 +150,9 @@ input[type="text"]:disabled {
 button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.input-form textarea {
+  width: 70%;
+  padding: var(--input-padding);
 }

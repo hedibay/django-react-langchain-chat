@@ -61,6 +61,38 @@ A real-time chatbot application using Django Channels, React, and Google's Gemin
 3. You should see a green "Connected" indicator in the top-right corner
 4. Type a message and press Enter to chat with the AI
 
+### 4. CV Critic Agent (New)
+
+You can switch the mode to **CV Critic** from the dropdown at the top of the app.
+
+- Paste your resume text in the input area
+- Optionally paste a job description to tailor the critique
+- Click Send to receive a structured, actionable review
+
+If you prefer calling the backend directly over WebSocket, send JSON like:
+
+```json
+{
+  "type": "cv_critic",
+  "resume": "<your resume text>",
+  "job": "<optional job description>"
+}
+```
+
+To critique a PDF resume, send base64:
+
+```json
+{
+  "type": "cv_critic_pdf",
+  "pdf_base64": "data:application/pdf;base64,<BASE64_DATA>",
+  "job": "<optional job description>"
+}
+```
+
+Notes:
+- Max ~10 pages parsed and ~20k characters extracted.
+- If extraction fails (scanned PDFs), convert to text/OCR first.
+
 ## Troubleshooting
 
 ### Common Issues:
