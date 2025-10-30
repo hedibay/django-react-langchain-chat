@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import DogClassifier from './DogClassifier';
+import ObjectDetector from './ObjectDetector';
 import './App.css';
 
 const StreamLangchain = () => {
     // State to store the input from the user
     const [input, setInput] = useState('');
-    const [mode, setMode] = useState('chat'); // 'chat' | 'cv_critic' | 'career_mapper'
+    const [mode, setMode] = useState('chat'); // 'chat' | 'cv_critic' | 'career_mapper' | 'dog_classifier' | 'object_detector'
     const [job, setJob] = useState(''); // Optional job description
     const [pdfFile, setPdfFile] = useState(null);
     const [tutor, setTutor] = useState({ language: '', lesson_mode: 'casual' });
@@ -223,6 +225,8 @@ const StreamLangchain = () => {
                         <option value="cv_critic">CV Critic</option>
                         <option value="career_mapper">Career Path Mapper</option>
                         <option value="language_tutor">Language Tutor</option>
+                        <option value="dog_classifier">Dog Breed Classifier</option>
+                        <option value="object_detector">Object Detector</option>
                     </select>
                 </label>
                 {mode === 'cv_critic' && (
@@ -332,11 +336,19 @@ const StreamLangchain = () => {
                         )}
                     </div>
                 )}
+                {mode === 'dog_classifier' && (
+                    <DogClassifier />
+                )}
+                {mode === 'object_detector' && (
+                    <ObjectDetector />
+                )}
             </div>
-            <div className="messages-container">
-                {responses.map((response, index) => renderMessage(response, index))}
-                <div ref={messagesEndRef} /> {/* Invisible element to help scroll into view */}
-            </div>
+            {mode !== 'dog_classifier' && mode !== 'object_detector' && (
+                <>
+                    <div className="messages-container">
+                        {responses.map((response, index) => renderMessage(response, index))}
+                        <div ref={messagesEndRef} /> {/* Invisible element to help scroll into view */}
+                    </div>
             <form onSubmit={handleSubmit} className="input-form">
                 {mode === 'cv_critic' ? (
                     <textarea
@@ -357,6 +369,8 @@ const StreamLangchain = () => {
                 )}
                 <button type="submit" disabled={!isConnected}>Send</button>
             </form>
+                </>
+            )}
         </div>
     );
 };
